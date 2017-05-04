@@ -1,0 +1,22 @@
+{
+  "name": "koa2-demo",
+  "version": "1.0.0",
+  "description": "a test demo for koa2",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "tianxiaohu",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.2.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-router": "^7.1.1",
+    "koa-views": "^6.0.2",
+    "nunjucks": "^3.0.0"
+  },
+  "devDependencies": {
+    "koa-router": "^7.1.1"
+  }
+}
