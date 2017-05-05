@@ -2,22 +2,22 @@
 
 let Koa = require('koa');
 let App = new Koa();
-let router = require('./router/router')
+let router = require('./server/router/router')
 let bodyParser = require('koa-bodyparser');
 let views = require('koa-views');
 
 /**
- * 中间件
+ * Middlewares
  */
 /** A body parser for koa */
 App.use(bodyParser());
-/** 使用模板引擎 nunjunks */
-App.use(views(__dirname + '/views'),{
+/** Template Engine -- nunjunks */
+App.use(views(__dirname + '/server/views', {
     map: { html: 'nunjucks' }   
-});
+}));
 
 /**
- * 路由初始化
+ * Router
  */
 router.init(App);
 

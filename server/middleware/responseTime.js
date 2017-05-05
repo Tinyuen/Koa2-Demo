@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * 记录响应时间中间件
+ * The middleware of record the response time
  */
 module.exports = function() {
     return async function(ctx, next) {
@@ -9,6 +9,7 @@ module.exports = function() {
         await next();
         let time = new Date() - start;
         let logMsg = `This request cost ${time}ms`
-        console.log(logMsg);
+        /** Instead of consoling the message， You can use Koa-log */
+        console.info(logMsg);
     }
 }
