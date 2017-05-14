@@ -1,5 +1,7 @@
 'use strict';
 
+let util = require('../../util');
+
 let core = {
     async get(ctx) {
         //use koa2 cookies
@@ -7,8 +9,11 @@ let core = {
             expires: new Date('2017-12-12'),
             path: '/home'  
         });
+        let publicPath = util.getPublicPath();
         let data = {
-            name: 'xiaohu'
+            name: 'xiaohu',
+            js: publicPath + 'home.js',
+            css: publicPath + 'home.css'
         }
         //use nunjuncks to render the page
         await ctx.render('home.html', data);
