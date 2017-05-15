@@ -1,11 +1,12 @@
 'use strict';
 
-const path        = require('path');
-const webpack     = require('webpack');
-const util        = require('./util');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const autoprefixer = require('autoprefixer');
-const frontBase = './front';
+const path                  = require('path');
+const webpack               = require('webpack');
+const util                  = require('./util');
+const ExtractTextPlugin     = require('extract-text-webpack-plugin');
+const ManifestPlugin        = require('webpack-manifest-plugin');
+const autoprefixer          = require('autoprefixer');
+const frontBase             = './front';
 
 let buildPath = path.resolve(__dirname, 'static/build');
 let buildEnv = util.isDEV || util.isLOCAL ? '/dev' : 
@@ -25,6 +26,7 @@ let packPlugins = {
     hot: new webpack.HotModuleReplacementPlugin(),
     namedModule: new webpack.NamedModulesPlugin(),
     noError: new webpack.NoEmitOnErrorsPlugin(),
+    manifest: new ManifestPlugin(),
     css: new ExtractTextPlugin({
         filename: util.isRelease || util.isYZ ? '[name].[hash:8].css' : '[name].css',
         allChunks: false
@@ -50,7 +52,8 @@ if (util.isDEV || util.isLOCAL) {
     plugins.push(packPlugins.hot);
     plugins.push(packPlugins.namedModule);
     plugins.push(packPlugins.noError);  
-
+} else {
+    plugins.push(packPlugins.manifest);
 } 
 
 if (util.isYZ || util.isRelease) {
@@ -131,7 +134,7 @@ let packConfig = {
                 loader: 'url',
                 options: {
                     limit: 4096,
-                    name: '[name].[ext]?[hash]'
+                    name: '[name].[ext]?[hash:16]'
                 }
             }
         ]

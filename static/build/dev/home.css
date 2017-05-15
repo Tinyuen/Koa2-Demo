@@ -1,8 +1,0 @@
-body, html {
-  margin: 0;
-  padding: 0; }
-
-.test {
-  width: 200px;
-  height: 100px;
-  background: url(/build/dev/1.jpg?cd2bad02cc237dcaf94f0e0ab5b303a6) 0 0 no-repeat; }
