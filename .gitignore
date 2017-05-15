@@ -1,5 +1,9 @@
 node_modules/**
-static/build/**
+static/**/*.js
+static/**/*.css
+static/**/*.jpg
+static/**/*.png
+static/**/*.map
 .idea/**
 .vscode
 .DS_Store

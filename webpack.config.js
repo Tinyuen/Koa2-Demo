@@ -28,7 +28,7 @@ let packPlugins = {
     noError: new webpack.NoEmitOnErrorsPlugin(),
     manifest: new ManifestPlugin(),
     css: new ExtractTextPlugin({
-        filename: util.isRelease || util.isYZ ? '[name].[hash:8].css' : '[name].css',
+        filename: util.isDEV || util.isLOCAL ? '[name].css' : '[name].[hash:8].css',
         allChunks: false
     }),
     uglify: new webpack.optimize.UglifyJsPlugin({
@@ -47,7 +47,7 @@ let packPlugins = {
  * Custom config for different environement
  * =======================================
  */
-if (util.isDEV || util.isLOCAL) {
+if (util.isLOCAL) {
     //plugins
     plugins.push(packPlugins.hot);
     plugins.push(packPlugins.namedModule);
@@ -134,7 +134,7 @@ let packConfig = {
                 loader: 'url',
                 options: {
                     limit: 4096,
-                    name: '[name].[ext]?[hash:16]'
+                    name: util.isDEV ? '[name].[ext]' : '[name].[ext]?[hash:16]'
                 }
             }
         ]

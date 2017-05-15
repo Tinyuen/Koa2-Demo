@@ -9,11 +9,14 @@ let core = {
             expires: new Date('2017-12-12'),
             path: '/home'  
         });
+
+
         let publicPath = util.getPublicPath();
+        let manifest = util.getManifest();
         let data = {
             name: 'xiaohu',
-            js: publicPath + 'home.js',
-            css: publicPath + 'home.css'
+            js: publicPath + manifest['home.js'],
+            css: publicPath + manifest['home.css']
         }
         //use nunjuncks to render the page
         await ctx.render('home.html', data);

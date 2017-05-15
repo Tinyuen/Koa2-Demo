@@ -19,6 +19,14 @@ let core = {
                   this.isQA ? '/build/qa/' : 
                   '/build/dev/';
         return pathStr;
+    },
+    /**
+     * 获取打包的manifest对象
+     */
+    getManifest() {
+        let env = this.isDEV || this.isLOCAL ? 'dev' : this.isQA ? 'qa' : this.isYZ || this.isRelease ? 'release' : 'dev';
+        let manifest = require(`../static/build/${env}/manifest.json`) || {};
+        return manifest;    
     }
 }
 
