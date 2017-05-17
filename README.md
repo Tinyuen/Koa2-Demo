@@ -1,5 +1,5 @@
 # Koa2-Demo
-A demo project with Koa2/nunjucks/Node
+A demo project with Koa2
 
 ## Installation
     $ npm install
@@ -7,6 +7,10 @@ A demo project with Koa2/nunjucks/Node
 
 ## Getting start
     $ npm run dev  
+
+## Usage
+    $ npm run [env]         (env = dev|qa|yz)   
+    $ npm run pack[dev]     Build the code
 
 ## About
     - Web Framework:      Koa2
