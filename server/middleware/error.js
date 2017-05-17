@@ -8,12 +8,15 @@ module.exports = function() {
         try {
             await next();
         } catch (err) {
+            let data = {
+                err: err
+            }
             ctx.status = err.status || 500;
             ctx.type = 'html';
             switch (ctx.accepts('html', 'json')) {
                 case 'html':
                     ctx.type = 'html';
-                    await ctx.render('500');
+                    await ctx.render('500',data);
                     break;
                 case 'json':
                     ctx.type = 'json';
