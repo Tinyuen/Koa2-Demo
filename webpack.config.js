@@ -83,7 +83,7 @@ let packConfig = {
         publicPath: util.getPublicPath()
     },
     plugins: plugins,
-    //不推荐忽略 -loader
+    /** 不推荐忽略 -loader */ 
     resolveLoader: {
         moduleExtensions: ["-loader"],
     },
