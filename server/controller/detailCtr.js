@@ -5,7 +5,7 @@ let core = {
         let data = {
             content: 'some detail'
         }
-        await ctx.render('detail.html', data);
+        await ctx.render('detail', data);
     }
 }
 

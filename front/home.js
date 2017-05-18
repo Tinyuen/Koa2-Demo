@@ -4,7 +4,7 @@ require('./home.scss');
 
 let core = {
     init(){
-        console.log('init from home...');
+        console.log('Init from home...');
     }
 }
 core.init();

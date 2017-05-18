@@ -15,11 +15,16 @@ let core = {
         let manifest = util.getManifest();
         let data = {
             name: 'xiaohu',
+            seo: {
+                title: 'Home',
+                keywords: '',
+                description: ''
+            },
             js: publicPath + manifest['home.js'],
             css: publicPath + manifest['home.css']
         }
         //use nunjuncks to render the page
-        await ctx.render('home.html', data);
+        await ctx.render('home', data);
     }
 }
 

@@ -2,8 +2,10 @@
 
 const Koa           = require('koa');
 const App           = new Koa();
+const path          = require('path');
 const bodyParser    = require('koa-bodyparser');
-const views         = require('koa-views');
+// const views         = require('koa-views');
+const koaNunjucks   = require('koa-nunjucks-2');
 const serverStatic  = require('koa-static');
 const logger        = require('koa-logger');
 const compose       = require('koa-compose');
@@ -27,12 +29,25 @@ if (util.isDEV || util.isLOCAL) {
 }
 
 /* Koa static (用来处理非路由访问的文件) */
-App.use(serverStatic(__dirname + '/static'));
+App.use(serverStatic(path.join(__dirname, '/static')));
+
+/**
+ * Bug: can not use extends, err: can not found _layout.html
+ * so, use koa-nunjucks-2 insted!
+ */
+// App.use(views(__dirname + '/server/views', {
+//     map: { html: 'nunjucks' },
+//     cache: util.isDEV || util.isLOCAL ? false : 'memory'    
+// }));
 
 /* Template Engine -- nunjunks */
-App.use(views(__dirname + '/server/views', {
-    map: { html: 'nunjucks' },
-    cache: util.isDEV || util.isLOCAL ? false : 'memory'    
+App.use(koaNunjucks({
+  ext: 'html',
+  path: path.join(__dirname, '/server/views'),
+  nunjucksConfig: {
+    autoescape: true,
+    noCache: util.isDEV || util.isLOCAL
+  }
 }));
 
 /* A body parser for koa */
@@ -55,5 +70,4 @@ App.on('error', (err, ctx) => {
     console.log(`Server Error: ${err}`);
 });
 
-App.listen(3000);
-console.log('server running at 3000...')
+module.exports = App;

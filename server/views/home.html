@@ -1,8 +1,10 @@
-{% extends "./_layout.html" %}
+{% extends './_layout.html' %}
 
 {% block head %}
+    <meta name="Keywords" content="{{ seo.keywords }}"/>
+    <meta name="Description" content="{{ seo.description}}"/>
     <link rel="stylesheet" href="{{ css }}">
-    <title>{{ title }}</title>
+    <title>{{ seo.title }}</title>
 {% endblock %}
 
 {% block body %}

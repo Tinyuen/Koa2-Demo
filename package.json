@@ -5,15 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "local": "NODE_ENV=local node app.js",
-    "dev": "NODE_ENV=dev node app.js",
-    "qa": "NODE_ENV=qa node app.js",
-    "yz": "NODE_ENV=yz node app.js",
-    "packlocal": "NODE_ENV=local webpack",
-    "packdev": "NODE_ENV=dev webpack",
-    "packqa": "NODE_ENV=qa webpack",
-    "packyz": "NODE_ENV=yz webpack",
-    "packrelease": "NODE_ENV=release webpack"
+    "local": "gulp start",
+    "dev": "gulp start",
+    "qa": "",
+    "yz": "",
+    "packlocal": "NODE_ENV=local gulp webpack",
+    "packdev": "NODE_ENV=dev gulp webpack",
+    "packqa": "NODE_ENV=qa gulp webpack",
+    "packyz": "NODE_ENV=yz gulp webpack",
+    "packrelease": "NODE_ENV=release gulp webpack"
   },
   "author": "tianxiaohu",
   "license": "ISC",
@@ -29,6 +29,7 @@
     "koa-bodyparser": "^4.2.0",
     "koa-compose": "^4.0.0",
     "koa-logger": "^2.0.1",
+    "koa-nunjucks-2": "^3.0.0-alpha.5",
     "koa-router": "^7.1.1",
     "koa-static": "^3.0.0",
     "koa-views": "^6.0.2",
@@ -42,6 +43,12 @@
     "webpack-manifest-plugin": "^1.1.0"
   },
   "devDependencies": {
-    "koa-router": "^7.1.1"
+    "browser-sync": "^2.18.11",
+    "fs-extra": "^3.0.1",
+    "gulp": "^3.9.1",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-util": "^3.0.8",
+    "koa-router": "^7.1.1",
+    "nodemon": "^1.11.0"
   }
 }

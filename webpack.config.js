@@ -62,6 +62,7 @@ if (util.isYZ || util.isRelease) {
 
 plugins.push(packPlugins.css);
 plugins.push(packPlugins.loaderOption);
+
 /**
  * webpak config
  * 'webpack-hot-middleware/client?reload=true', './src/index.js'
