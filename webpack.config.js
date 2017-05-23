@@ -113,16 +113,14 @@ let packConfig = {
                 use: ExtractTextPlugin.extract({
                     fallback: 'style',
                     use: [
-                        'css',
+                        { loader: 'css' },
                         {
                             loader: 'postcss',
                             options: {
-                                plugins: [autoprefixer({ browsers: ['> 5%'] })]
+                                plugins: [ autoprefixer({ browsers: ['> 5%'] }) ]
                             }
                         },
-                        {
-                            loader: 'sass'
-                        }
+                        { loader: 'sass' }
                     ]
                 })
             },

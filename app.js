@@ -6,14 +6,22 @@ const path          = require('path');
 const bodyParser    = require('koa-bodyparser');
 // const views         = require('koa-views');
 const koaNunjucks   = require('koa-nunjucks-2');
+const convert       = require('koa-convert');
 const serverStatic  = require('koa-static');
 const logger        = require('koa-logger');
 const compose       = require('koa-compose');
+const compress      = require('koa-compress');
+const helmet        = require('koa-helmet');
+const validate      = require('koa-validate');
+const session       = require('koa-session');
+const conditional   = require('koa-conditional-get');
+const etag          = require('koa-etag');
 const webpack       = require('webpack');
 const devMiddleware = require('koa-webpack-dev-middleware');
 const hotMiddleware = require('koa-webpack-hot-middleware');
 const notFound      = require('./server/middleware/404');
 const error         = require('./server/middleware/error');
+const serverId      = require('./server/middleware/serverId');
 const router        = require('./server/router/router');
 
 const util          = require('./util');
@@ -32,7 +40,7 @@ if (util.isDEV || util.isLOCAL) {
     /* Koa logger midileware | Near the top of all middleware */
     App.use(logger());
     /* Hot Module Reload Middleware for Koa2 */
-    App.use(devMiddleware(compiler, {
+    App.use(convert(devMiddleware(compiler, {
         noInfo: false,
         quiet: false,
         watchOptions: {
@@ -43,8 +51,8 @@ if (util.isDEV || util.isLOCAL) {
         stats: {
             colors: true
         }
-    }));
-    App.use(hotMiddleware(compiler));
+    })));
+    App.use(convert(hotMiddleware(compiler)));
 }
 
 /* Koa static (用来处理非路由访问的文件) */
@@ -71,7 +79,30 @@ App.use(koaNunjucks({
 }));
 
 /* A body parser for koa */
-App.use(bodyParser());
+//App.use(bodyParser());
+
+/**
+ * Add Header
+ */
+App.use(serverId());
+/**
+ * koa-helmet is a wrapper for helmet to work with koa. 
+ * It provides important security headers to make your app more secure by default.
+ */
+App.use(helmet());
+/**
+ * Compress middleware for Koa
+ */
+App.use(compress());
+/**
+ * Etag support
+ */
+App.use(conditional());
+App.use(etag());
+/**
+ * Session Middleware for Koa 
+ */
+App.use(session(App));
 
 /* 404 Error Handler */
 App.use(notFound());
