@@ -49,6 +49,9 @@
     "gulp-nodemon": "^2.2.1",
     "gulp-util": "^3.0.8",
     "koa-router": "^7.1.1",
-    "nodemon": "^1.11.0"
+    "koa-webpack-dev-middleware": "^1.4.6",
+    "koa-webpack-hot-middleware": "^1.0.3",
+    "nodemon": "^1.11.0",
+    "webpack-hot-middleware": "^2.18.0"
   }
 }

@@ -47,7 +47,7 @@ let packPlugins = {
  * Custom config for different environement
  * =======================================
  */
-if (util.isLOCAL) {
+if (util.isLOCAL || util.isDEV) {
     //plugins
     plugins.push(packPlugins.hot);
     plugins.push(packPlugins.namedModule);
@@ -68,10 +68,7 @@ plugins.push(packPlugins.loaderOption);
  * 'webpack-hot-middleware/client?reload=true', './src/index.js'
  */
 let packConfig = {
-    entry: {
-        home: [path.resolve(frontBase, 'home')],
-        detail: [path.resolve(frontBase, 'detail')]
-    },
+    entry: {},
     output: {
         path: buildPath + buildEnv,
         filename: util.isDEV ? '[name].js' :  '[name].[hash:8].js',
@@ -141,5 +138,21 @@ let packConfig = {
         ]
     }
 }
+
+/**
+ * 动态配置webpack入口
+ */
+function addEntry(config, name) {
+    config.entry[name] = [path.resolve(frontBase, name)];
+    if (util.isLOCAL || util.isDEV) {
+        config.entry[name].push('webpack-hot-middleware/client?reload=true');
+    }
+}
+
+/**
+ * 添加入口文件
+ */
+addEntry(packConfig, 'home');
+addEntry(packConfig, 'detail');
 
 module.exports = packConfig;
