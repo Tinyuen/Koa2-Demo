@@ -39,7 +39,10 @@ App.name = 'Koa2-Demo';
 if (util.isDEV || util.isLOCAL) {
     /* Koa logger midileware | Near the top of all middleware */
     App.use(logger());
-    /* Hot Module Reload Middleware for Koa2 */
+    /** 
+     * Hot Module Reload Middleware for Koa2 
+     * dev-middleware监听变动，重新编译
+     */
     App.use(convert(devMiddleware(compiler, {
         noInfo: false,
         quiet: false,
@@ -52,6 +55,11 @@ if (util.isDEV || util.isLOCAL) {
             colors: true
         }
     })));
+    /**
+     * hot-middleware监听编译事件，
+     * 把变动通知到每一个通过Server Sent Events 连接的客户端，客户端接收到消息，
+     * 检查本地是否是新的，如果过期了触发webpack的热更新
+     */
     App.use(convert(hotMiddleware(compiler)));
 }
 
@@ -63,7 +71,7 @@ App.use(serverStatic(path.join(__dirname, '/static')));
  * so, use koa-nunjucks-2 instead!
  */
 /** App.use(views(__dirname + '/server/views', {
- *   map: { html: 'nunjucks' },
+ *   map: { html: 'nunjucks' }
  *   cache: util.isDEV || util.isLOCAL ? false : 'memory'    
  *  })); 
  */

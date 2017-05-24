@@ -10,9 +10,9 @@ let core = {
             path: '/home'  
         });
 
-
         let publicPath = util.getPublicPath();
         let manifest = util.getManifest();
+
         let data = {
             name: 'xiaohu',
             seo: {
