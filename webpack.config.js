@@ -23,6 +23,14 @@ let plugins = [],
  */
 let packPlugins = {
     //order: new webpack.optimize.OccurrenceOrderPlugin(), //wepack2 中默认加载
+    // 全局变量
+    global: new webpack.DefinePlugin({
+        __DEV__: JSON.stringify(util.isDEV),
+        __LOCAL__: JSON.stringify(util.isLOCAL),
+        __QA__: JSON.stringify(util.isQA),
+        __YZ__: JSON.stringify(util.isYZ),
+        __RELEASE__: JSON.stringify(util.isRelease)
+    }),
     hot: new webpack.HotModuleReplacementPlugin(),
     namedModule: new webpack.NamedModulesPlugin(),
     noError: new webpack.NoEmitOnErrorsPlugin(),
@@ -62,6 +70,7 @@ if (util.isYZ || util.isRelease) {
 
 plugins.push(packPlugins.css);
 plugins.push(packPlugins.loaderOption);
+plugins.push(packPlugins.global);
 
 /**
  * webpak config
